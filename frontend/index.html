@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="ForgePad — a privacy-first local text and developer workbench.">
+  <meta name="theme-color" content="#17191d">
+  <title>ForgePad</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">FP</div>
+      <div>
+        <strong>ForgePad</strong>
+        <span>local workbench</span>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button id="openFile" class="button secondary">Open</button>
+      <button id="downloadFile" class="button primary">Save</button>
+      <input id="fileInput" type="file" hidden>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="search-wrap">
+        <input id="toolSearch" placeholder="Find a tool…" autocomplete="off">
+      </div>
+      <nav id="toolList"></nav>
+      <div class="sidebar-foot">
+        <button id="newDoc" class="button wide">New document</button>
+        <div class="status"><span id="saveDot"></span><span id="saveStatus">Saved locally</span></div>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <section class="workspace-head">
+        <div>
+          <div class="eyebrow" id="toolCategory">EDITOR</div>
+          <h1 id="toolTitle">Markdown Editor</h1>
+          <p id="toolDescription">Write in plain text and preview Markdown beside it.</p>
+        </div>
+        <div class="tool-actions" id="toolActions"></div>
+      </section>
+
+      <section id="toolPanel" class="tool-panel"></section>
+    </main>
+  </div>
+
+  <template id="editorTemplate">
+    <div class="editor-grid">
+      <textarea id="editor" spellcheck="true" placeholder="Start writing…"></textarea>
+      <article id="markdownPreview" class="preview"></article>
+    </div>
+  </template>
+
+  <template id="jsonTemplate">
+    <div class="split-tool">
+      <textarea id="jsonInput" placeholder='{"hello":"world"}'></textarea>
+      <div class="result-box"><pre id="jsonOutput"></pre></div>
+    </div>
+    <div class="tool-row">
+      <button class="button primary" id="jsonFormat">Format</button>
+      <button class="button secondary" id="jsonMinify">Minify</button>
+      <button class="button secondary" id="jsonCopy">Copy result</button>
+    </div>
+  </template>
+
+  <template id="diffTemplate">
+    <div class="diff-grid">
+      <textarea id="diffA" placeholder="Original text"></textarea>
+      <textarea id="diffB" placeholder="Changed text"></textarea>
+    </div>
+    <div class="tool-row">
+      <button class="button primary" id="diffRun">Compare</button>
+    </div>
+    <div id="diffOutput" class="diff-output"></div>
+  </template>
+
+  <template id="regexTemplate">
+    <div class="regex-bar">
+      <input id="regexPattern" placeholder="Pattern, e.g. \\b[A-Z][a-z]+\\b">
+      <input id="regexFlags" value="g" placeholder="flags">
+    </div>
+    <textarea id="regexText" placeholder="Test text"></textarea>
+    <div class="tool-row"><button class="button primary" id="regexRun">Test regex</button></div>
+    <div id="regexOutput" class="result-box"></div>
+  </template>
+
+  <template id="encodeTemplate">
+    <div class="encode-grid">
+      <textarea id="encodeInput" placeholder="Text to transform"></textarea>
+      <textarea id="encodeOutput" readonly placeholder="Result"></textarea>
+    </div>
+    <div class="tool-row">
+      <button class="button primary" data-encode="b64e">Base64 encode</button>
+      <button class="button secondary" data-encode="b64d">Base64 decode</button>
+      <button class="button secondary" data-encode="urle">URL encode</button>
+      <button class="button secondary" data-encode="urld">URL decode</button>
+    </div>
+  </template>
+
+  <template id="textTemplate">
+    <textarea id="textInput" class="large-input" placeholder="Paste or write text here…"></textarea>
+    <div id="textStats" class="stats-grid"></div>
+    <div class="tool-row">
+      <button class="button secondary" data-case="upper">UPPERCASE</button>
+      <button class="button secondary" data-case="lower">lowercase</button>
+      <button class="button secondary" data-case="title">Title Case</button>
+      <button class="button secondary" data-case="sentence">Sentence case</button>
+      <button class="button secondary" data-case="trim">Trim lines</button>
+    </div>
+  </template>
+
+  <template id="snippetsTemplate">
+    <div class="snippet-form">
+      <input id="snippetName" placeholder="Snippet name">
+      <textarea id="snippetBody" placeholder="Snippet content"></textarea>
+      <button class="button primary" id="saveSnippet">Save snippet</button>
+    </div>
+    <div id="snippetList" class="snippet-list"></div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
